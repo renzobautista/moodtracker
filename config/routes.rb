@@ -1,4 +1,9 @@
 Moodtracker::Application.routes.draw do
+  resources :sessions
+  resources :users
+  get '/logout' => 'sessions#destroy', as: :logout
+  get '/login' => 'sessions#new', as: :login
+  post '/login' => 'sessions#create', as: :login_post
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
