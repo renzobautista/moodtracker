@@ -1,0 +1,7 @@
+<h1>Welcome, <%= current_user.username %></h1>
+
+<h3>Today's Log</h3>
+<%= render partial: 'logs/form' %>
+
+<h3>Past Logs</h3>
+<%= render partial: 'logs/logs_list' %>

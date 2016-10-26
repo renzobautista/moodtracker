@@ -1,0 +1,5 @@
+<%= form_tag factors_path do %>
+  <%= hidden_field_tag :name, factor %>
+    
+  <%= submit_tag factor.capitalize %>
+<% end %>

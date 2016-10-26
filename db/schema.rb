@@ -13,18 +13,18 @@
 
 ActiveRecord::Schema.define(version: 20161026044554) do
 
-  create_table "categories", force: true do |t|
-    t.string   "question"
-    t.boolean  "yes_no"
-    t.integer  "user_id"
+  create_table "factor_logs", force: true do |t|
+    t.integer  "log_id"
+    t.integer  "factor_id"
+    t.integer  "score"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "category_logs", force: true do |t|
-    t.integer  "log_id"
-    t.integer  "category_id"
-    t.integer  "score"
+  create_table "factors", force: true do |t|
+    t.string   "question"
+    t.boolean  "yes_no"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

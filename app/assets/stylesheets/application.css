@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+.logs_list_item {
+  display: inline-block;
+  margin-right: 10px;
+}

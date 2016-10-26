@@ -1,0 +1,12 @@
+<h1>Factors</h1>
+<% if !@factors.empty? %>
+  <ul>
+    <% for factor in @factors %>
+      <li><%= factor.question %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You are currently not tracking any factors.</p>
+<% end %>
+
+<a href="<%= new_factor_path %>">Track a new factor</a>

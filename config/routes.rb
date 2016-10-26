@@ -1,4 +1,6 @@
 Moodtracker::Application.routes.draw do
+  resources :logs
+  resources :factors
   resources :sessions
   resources :users
   get '/logout' => 'sessions#destroy', as: :logout

@@ -1,0 +1,21 @@
+<% url = @log == nil ? logs_path : log_path(@log) %>
+<%= form_for @log, url: url do |f| %>
+  <%= label_tag :mood %>
+  <%= f.number_field :mood, value: @log.mood %>
+
+  <% for factor_log in @log.factor_logs %>
+    <%= label_tag factor_log.factor.question %>
+    <% if factor_log.factor.yes_no %>
+      <%= hidden_field_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), "0" %>
+      <%= check_box_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), "1", (factor_log.score != nil and factor_log.score != 0) %>
+    <% else %>
+      <%= number_field_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), factor_log.score %>
+    <% end %>
+  <% end %>
+
+  <% if @log.mood %>
+    <%= f.submit "Update" %>
+  <% else %>
+    <%= f.submit "Create" %>
+  <% end %>
+<% end %>

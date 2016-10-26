@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<%= root_url %>">MoodTracker</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="<%= root_url %>">Home</a></li>
+        <% if logged_in? %>
+          <li><a href="<%= factors_path %>">Factors</a></li>
+        <% end %>
+        <li>
+          <% if logged_in? %>
+            <a href="<%= logout_path %>">Logout</a>
+          <% else %>
+            <a href="<%= login_path %>">Login</a>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
