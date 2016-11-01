@@ -1,4 +1,4 @@
-<% url = @log == nil ? logs_path : log_path(@log) %>
+<% url = @log.id ? log_path(@log) : logs_path %>
 <%= form_for @log, url: url do |f| %>
   <%= label_tag :mood %>
   <%= f.number_field :mood, value: @log.mood %>

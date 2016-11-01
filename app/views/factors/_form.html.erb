@@ -1,0 +1,12 @@
+<%= form_for @factor, url: factors_path do |f| %>
+  <%= hidden_field_tag :custom, true %>
+
+  <%= label_tag :factor %>
+  <%= text_field_tag 'factor' %>
+
+  <%= label_tag :factor_type %>
+  <%= radio_button_tag 'factor_type', 'Yes or no' %> Yes or no
+  <%= radio_button_tag 'factor_type', 'Numeric' %> Numeric
+
+  <%= f.submit "Create" %>
+<% end %>

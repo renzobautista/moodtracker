@@ -2,7 +2,7 @@
 <% if !@factors.empty? %>
   <ul>
     <% for factor in @factors %>
-      <li><%= factor.question %></li>
+      <li><%= factor.question %> <%= link_to "Untrack", factor_path(factor), method: :delete, data: { confirm: 'Are you certain you want to stop tracking this factor?' } %></li>
     <% end %>
   </ul>
 <% else %>

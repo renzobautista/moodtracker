@@ -5,24 +5,40 @@ class FactorsController < ApplicationController
   end
 
   def new
+    @factor = Factor.new
   end
 
   def create
-    case params[:name]
-    when 'sleep'
-      @question = 'How many hours of sleep did you get last night?'
-      @yes_no = false
-    when 'workout'
-      @question = 'Did you work out today?'
-      @yes_no = true
+    if params[:custom]
+      question = params[:factor]
+      is_yes_no = true
+      if params[:factor_type] == 'Numeric'
+        is_yes_no = false
+      end
+      @factor = Factor.create(question: question, yes_no: is_yes_no, user_id: current_user.id)
     else
-      return render 'new'
+      case params[:name]
+      when 'sleep'
+        @question = 'Hours of sleep'
+        @yes_no = false
+      when 'workout'
+        @question = 'Worked out'
+        @yes_no = true
+      else
+        return render 'new'
+      end
+      if (current_user.factors.map {|c| c.question }).include?(@question)
+        @flash = ['You are already tracking that factor.']
+        return render 'new'
+      end
+      @factor = Factor.create(question: @question, yes_no: @yes_no, user_id: current_user.id)
     end
-    if (current_user.factors.map {|c| c.question }).include?(@question)
-      @flash = ['You are already tracking that factor.']
-      return render 'new'
-    end
-    @factor = Factor.create(question: @question, yes_no: @yes_no, user_id: current_user.id)
+    redirect_to factors_path
+  end
+
+  def destroy
+    @factor = Factor.find(params[:id])
+    @factor.delete()
     redirect_to factors_path
   end
 end
