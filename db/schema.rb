@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20161026044554) do
   create_table "factors", force: true do |t|
     t.string   "question"
     t.boolean  "yes_no"
+    t.boolean  "deleted"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

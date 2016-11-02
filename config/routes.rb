@@ -3,6 +3,7 @@ Moodtracker::Application.routes.draw do
   resources :factors
   resources :sessions
   resources :users
+  get '/graph' => 'graph#index', as: :graph
   get '/logout' => 'sessions#destroy', as: :logout
   get '/login' => 'sessions#new', as: :login
   post '/login' => 'sessions#create', as: :login_post

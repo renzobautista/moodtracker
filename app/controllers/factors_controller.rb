@@ -1,7 +1,7 @@
 class FactorsController < ApplicationController
 
   def index
-    @factors = current_user.factors
+    @factors = current_user.factors.where(deleted: false)
   end
 
   def new
@@ -15,7 +15,7 @@ class FactorsController < ApplicationController
       if params[:factor_type] == 'Numeric'
         is_yes_no = false
       end
-      @factor = Factor.create(question: question, yes_no: is_yes_no, user_id: current_user.id)
+      @factor = Factor.create(question: question, yes_no: is_yes_no, user_id: current_user.id, deleted: false)
     else
       case params[:name]
       when 'sleep'
@@ -31,14 +31,14 @@ class FactorsController < ApplicationController
         @flash = ['You are already tracking that factor.']
         return render 'new'
       end
-      @factor = Factor.create(question: @question, yes_no: @yes_no, user_id: current_user.id)
+      @factor = Factor.create(question: @question, yes_no: @yes_no, user_id: current_user.id, deleted: false)
     end
     redirect_to factors_path
   end
 
   def destroy
     @factor = Factor.find(params[:id])
-    @factor.delete()
+    @factor.update_attributes(deleted: true)
     redirect_to factors_path
   end
 end

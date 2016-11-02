@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     if logged_in?
-      factors = current_user.factors
+      factors = current_user.factors.where(deleted: false)
       @log = current_user.logs.where(date: Date.today)[0]
       if @log == nil
         @log = Log.new

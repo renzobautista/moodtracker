@@ -8,6 +8,7 @@
         <li><a href="<%= root_url %>">Home</a></li>
         <% if logged_in? %>
           <li><a href="<%= factors_path %>">Factors</a></li>
+          <li><a href="<%= graph_path %>">Graph</a></li>
         <% end %>
         <li>
           <% if logged_in? %>
