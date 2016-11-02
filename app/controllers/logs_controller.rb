@@ -2,10 +2,12 @@ class LogsController < ApplicationController
   def create
     @log = Log.new(user_id: current_user.id, date: Date.today)
     @log.mood = params[:log][:mood]
-    for factor_id, score in params[:log][:factor_logs]
-      factor_log = @log.factor_logs.build(factor_id: factor_id)
-      factor_log.score = score
-      factor_log.save
+    if params[:log][:factor_logs] != nil
+      for factor_id, score in params[:log][:factor_logs]
+        factor_log = @log.factor_logs.build(factor_id: factor_id)
+        factor_log.score = score
+        factor_log.save
+      end
     end
     @log.save
     redirect_to root_url
