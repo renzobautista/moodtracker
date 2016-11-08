@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+
+  def index
+    redirect_to root_url
+  end
+
   def new
   end
 
@@ -8,7 +13,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_url
     else
-      @flash = ["This user could not be created."]
+      @flash = @user.errors.full_messages
       render "new"
     end
   end
