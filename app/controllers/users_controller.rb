@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_url
     else
-      flash = ["This user could not be created."]
+      @flash = ["This user could not be created."]
       render "new"
     end
   end
