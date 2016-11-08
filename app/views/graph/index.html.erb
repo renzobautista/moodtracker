@@ -10,6 +10,14 @@
   <% end %>
 </ul>
 
+<% if @is_dual %>
+  <p>The correlation is <%= @correlation %></p>
+<% end %>
+
+<% if @is_dual %>
+  <p>The slope is <%= @slope %></p>
+<% end %>
+
 <script>
 
 // Set the dimensions of the canvas / graph

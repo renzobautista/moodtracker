@@ -3,6 +3,9 @@
   <%= label_tag :mood %>
   <%= f.number_field :mood, value: @log.mood %>
 
+  <%= label_tag :log %>
+  <%= f.text_field :summary, value: @log.summary %>
+
   <% for factor_log in @log.factor_logs %>
     <%= label_tag factor_log.factor.question %>
     <% if factor_log.factor.yes_no %>
