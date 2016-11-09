@@ -8,5 +8,11 @@
   <%= radio_button_tag 'factor_type', 'Yes or no' %> Yes or no
   <%= radio_button_tag 'factor_type', 'Numeric' %> Numeric
 
-  <%= f.submit "Create" %>
+  <br><br><br>
+  
+  <div class="row">
+  	<a class="waves-effect waves-light btn orange lighten-3 col s2"><%= f.submit "Create" %></a>
+  	<a href="<%= factors_path %>" class="waves-effect waves-light btn grey lighten-1 col s2 offset-s1">Cancel</a>
+  </div>
+
 <% end %>
