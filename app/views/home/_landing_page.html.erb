@@ -1,15 +1,55 @@
-<h1>Home page</h1>
+<div class="parallax-container">
+  	<div class="parallax"><img src="https://i3.wallpaperscraft.com/image/hand_paper_heart_pink_25730_1600x900.jpg"></div>
+</div>
 
-<h3>Sign up</h3>
-<%= form_for @user, url: users_path do |f| %>
-  <%= label_tag :username %>
-  <%= f.text_field :username %>
+<div class="section white">
+    <div class="row container">
+    	<h2 class="header">Mood Tracker</h2>
+    	<p class="grey-text text-darken-3 lighten-3"> The simplest way for you to keep track of your emotions throughout the day.</p>
+    </div>
+    <div class="row container">
+		   
+		<a class="waves-effect waves-light btn modal-trigger col s2 orange lighten-3" href="#modal1">Sign Up</a>
 
-  <%= label_tag :password %>
-  <%= f.password_field :password %>
+		  <div id="modal1" class="modal">
+		    <div class="modal-content">
+		      <div class="row"></div>
+		      <h3>Sign up</h3>
+		      <div class="row"> </div> <div class="row"></div>
+					<%= form_for @user, url: users_path do |f| %>
+					  <%= label_tag :username %>
+					  <%= f.text_field :username %>
 
-  <%= label_tag :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-    
-  <%= f.submit "Create" %>
-<% end %>
+					  <%= label_tag :password %>
+					  <%= f.password_field :password %>
+
+					  <%= label_tag :password_confirmation %>
+					  <%= f.password_field :password_confirmation %>
+					  
+					  <div class="row"></div>
+					  
+				      <div class="row">
+						  <a class="waves-effect waves-light btn orange lighten-3 col s2"><%= f.submit "Sign Up" %></a>
+						  <a href="#!" class="waves-effect waves-light btn orange grey lighten-1 col s2 offset-s1">Close</a>
+					  </div>
+
+					  <div class="row"></div><div class="row"></div>
+					<% end %>
+		    </div>
+		  </div> 
+
+		<a class="waves-effect waves-light btn col s2 offset-s1 grey lighten-1">Learn More</a>
+    	
+    </div>
+</div>
+
+<div class="parallax-container">
+    <div class="parallax"><img src="https://i3.wallpaperscraft.com/image/apple_macbook_laptop_headphones_notebook_cup_glasses_109420_1600x900.jpg"></div>
+</div>
+
+<script>
+	$(document).ready(function(){
+	  $('.parallax').parallax();
+	  $('.modal-trigger').leanModal();
+	});
+</script>
