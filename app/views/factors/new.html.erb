@@ -1,7 +1,20 @@
-<h1>Track a new factor</h1>
-<ul>
-  <li><%= render partial: 'track_factor_form', locals: {factor: 'sleep'} %></li>
-  <li><%= render partial: 'track_factor_form', locals: {factor: 'workout'} %></li>
-</ul>
+<div class="container">
+	<div class="container">
+		<br><br><br><br>
 
-<%= render partial: 'form' %>
+		<h3> Track a new factor</h3>
+
+		<br><br>
+
+		<ul>
+		  <li><%= render partial: 'track_factor_form', locals: {factor: 'sleep'} %></li>
+		  <li><%= render partial: 'track_factor_form', locals: {factor: 'workout'} %></li>
+		</ul>
+
+		<%= render partial: 'form' %>
+		
+
+		<br><br>
+		    
+	</div>
+</div>

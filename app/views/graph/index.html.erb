@@ -1,125 +1,128 @@
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<div class="container">
+  <br><br>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <div class= "container">
+    <h3><%= @graph_title %></h3>
+  </div>
 
-<h1><%= @graph_title %></h1>
-<div id="graph_container">
-</div>
+  <br><br>
 
-<ul>
-  <% for factor in @factors %>
-    <li><a href="<%= graph_path %>?factor_id=<%= factor.id %>"><%= factor.question %></a></li>
-  <% end %>
-</ul>
+  <div id="graph_container"></div>
 
-<% if @is_dual %>
-  <p>The correlation is <%= @slope %></p>
-<% end %>
-
-<script>
-$(document).ready(function() {
-
-// Set the dimensions of the canvas / graph
-var margin = {top: 30, right: 20, bottom: 30, left: 50},
-    width = document.getElementById('graph_container').clientWidth * 0.8,
-    height = 270 - margin.top - margin.bottom;
-
-// Parse the date / time
-var parseDate = d3.time.format("%Y-%m-%d").parse;
-
-// Set the ranges
-var x = d3.time.scale().range([0, width]);
-var y = d3.scale.linear().range([height, 0]);
-<% if @is_dual %>
-  var y1 = d3.scale.linear().range([height, 0]);
-<% end %>
-
-// Define the axes
-var xAxis = d3.svg.axis().scale(x)
-    .orient("bottom").ticks(<%= @logs.count/10 %>);
-
-var yAxis = d3.svg.axis().scale(y)
-    .orient("left").ticks(5);
-
-<% if @is_dual %>
-var yAxisRight = d3.svg.axis().scale(y1)
-    .orient("left").ticks(5);
-<% end %>
-
-// Define the line
-var valueline = d3.svg.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.mood); });
-
-<% if @is_dual %>
-var valueline2 = d3.svg.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y1(d.score); });
-<% end %>
-    
-// Adds the svg canvas
-var svg = d3.select("#graph_container")
-    .append("svg")
-        .attr("width", '100%')
-        .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-        .attr("transform", 
-              "translate(" + margin.left + "," + margin.top + ")");
-
-// Get the data
-data = [];
-<% if @is_dual %>
-  <% for log in @logs %>
-    data.push({date: "<%= log[:date] %>", mood: <%= log[:mood] %>, score: <%= log[:factor_log].score %>})
-  <% end %>
-<% else %>
-  <% for log in @logs %>
-    data.push({date: "<%= log.date %>", mood: <%= log.mood %>})
-  <% end %>
-<% end %>
-
-data.forEach(function(d) {
-    d.date = parseDate(d.date);
-    d.mood = +d.mood;
-    <% if @is_dual %>
-      d.score = +d.score;
+  <ul>
+    <% for factor in @factors %>
+      <li><a href="<%= graph_path %>?factor_id=<%= factor.id %>"><%= factor.question %></a></li>
     <% end %>
-});
+  </ul>
 
-// Scale the range of the data
-x.domain(d3.extent(data, function(d) { return d.date; }));
-y.domain([0, d3.max(data, function(d) { return d.mood; })]);
-<% if @is_dual %>
-y1.domain([0, d3.max(data, function(d) { return d.score; })]);
-<% end %>
+  <% if @is_dual %>
+    <p>The correlation is <%= @slope %></p>
+  <% end %>
 
-// Add the valueline path.
-svg.append("path")
-    .attr("class", "line")
-    .attr("d", valueline(data));
+  <script>
 
-<% if @is_dual %>
-  svg.append("path")        // Add the valueline2 path.
-      .style("stroke", "red")
-        .attr("d", valueline2(data));
-<% end %>
+  // Set the dimensions of the canvas / graph
+  var margin = {top: 30, right: 20, bottom: 30, left: 50},
+      width = 1000 - margin.left - margin.right,
+      height = 270 - margin.top - margin.bottom;
 
-// Add the X Axis
-svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+  // Parse the date / time
+  var parseDate = d3.time.format("%Y-%m-%d").parse;
 
-// Add the Y Axis
-svg.append("g")
-    .attr("class", "y axis")
-    .call(yAxis);
+  // Set the ranges
+  var x = d3.time.scale().range([0, document.getElementById('graph_container').clientWidth * 0.8]);
+  var y = d3.scale.linear().range([height, 0]);
+  <% if @is_dual %>
+    var y1 = d3.scale.linear().range([height, 0]);
+  <% end %>
 
-<% if @is_dual %>
-  svg.append("g")       
-      .attr("class", "y axis")  
-      .attr("transform", "translate(" + (width + 20) + " ,0)") 
-      .style("fill", "red")   
-      .call(yAxisRight);
-<% end %>
+  // Define the axes
+  var xAxis = d3.svg.axis().scale(x)
+      .orient("bottom").ticks(<%= @logs.count/10 %>);
 
-});
-</script>
+  var yAxis = d3.svg.axis().scale(y)
+      .orient("left").ticks(5);
+
+  <% if @is_dual %>
+  var yAxisRight = d3.svg.axis().scale(y1)
+      .orient("left").ticks(5);
+  <% end %>
+
+  // Define the line
+  var valueline = d3.svg.line()
+      .x(function(d) { return x(d.date); })
+      .y(function(d) { return y(d.mood); });
+
+  <% if @is_dual %>
+  var valueline2 = d3.svg.line()
+      .x(function(d) { return x(d.date); })
+      .y(function(d) { return y1(d.score); });
+  <% end %>
+      
+  // Adds the svg canvas
+  var svg = d3.select("#graph_container")
+      .append("svg")
+          .attr("width", '100%')
+          .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+          .attr("transform", 
+                "translate(" + margin.left + "," + margin.top + ")");
+
+  // Get the data
+  data = [];
+  <% if @is_dual %>
+    <% for log in @logs %>
+      data.push({date: "<%= log[:date] %>", mood: <%= log[:mood] %>, score: <%= log[:factor_log].score %>})
+    <% end %>
+  <% else %>
+    <% for log in @logs %>
+      data.push({date: "<%= log.date %>", mood: <%= log.mood %>})
+    <% end %>
+  <% end %>
+
+  data.forEach(function(d) {
+      d.date = parseDate(d.date);
+      d.mood = +d.mood;
+      <% if @is_dual %>
+        d.score = +d.score;
+      <% end %>
+  });
+
+  // Scale the range of the data
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+  y.domain([0, d3.max(data, function(d) { return d.mood; })]);
+  <% if @is_dual %>
+  y1.domain([0, d3.max(data, function(d) { return d.score; })]);
+  <% end %>
+
+  // Add the valueline path.
+  svg.append("path")
+      .attr("class", "line")
+      .attr("d", valueline(data));
+
+  <% if @is_dual %>
+    svg.append("path")        // Add the valueline2 path.
+        .style("stroke", "red")
+          .attr("d", valueline2(data));
+  <% end %>
+
+  // Add the X Axis
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  // Add the Y Axis
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  <% if @is_dual %>
+    svg.append("g")       
+        .attr("class", "y axis")  
+        .attr("transform", "translate(" + width + " ,0)") 
+        .style("fill", "red")   
+        .call(yAxisRight);
+  <% end %>
+  </script>
+</div>
