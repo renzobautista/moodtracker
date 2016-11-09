@@ -1,14 +1,24 @@
-<% for log in @logs %>
-  <div class="logs_list_item">
-    <p>Date: <%= log.date.strftime("%b %e, %Y") %></p>
-    <p>Mood: <%= log.mood %></p>
-    <% for factor_log in log.factor_logs %>
-      <% if factor_log.factor.yes_no %>
-        <% response = factor_log.score == 0 ? "No" : "Yes" %>
-        <p><%= factor_log.factor.question%>: <%= response %></p>
-      <% else %>
-        <p><%= factor_log.factor.question%>: <%= factor_log.score %></p>
+<div class="carousel">
+
+  <% for log in @logs %>
+    <div class="logs_list_item carousel-item" >
+      <h5><%= log.date.strftime("%b %e, %Y") %></h5>
+      <p>Mood: <%= log.mood %></p>
+      <% for factor_log in log.factor_logs %>
+        <% if factor_log.factor.yes_no %>
+          <% response = factor_log.score == 0 ? "No" : "Yes" %>
+          <p><%= factor_log.factor.question%>: <%= response %></p>
+        <% else %>
+          <p><%= factor_log.factor.question%>: <%= factor_log.score %></p>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-<% end %>
+    </div>
+  <% end %>
+
+</div>
+
+<script>
+    $(document).ready(function(){
+      $('.carousel').carousel();
+    });
+</script>
