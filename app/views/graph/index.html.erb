@@ -11,25 +11,22 @@
 </ul>
 
 <% if @is_dual %>
-  <p>The correlation is <%= @correlation %></p>
-<% end %>
-
-<% if @is_dual %>
-  <p>The slope is <%= @slope %></p>
+  <p>The correlation is <%= @slope %></p>
 <% end %>
 
 <script>
+$(document).ready(function() {
 
 // Set the dimensions of the canvas / graph
 var margin = {top: 30, right: 20, bottom: 30, left: 50},
-    width = 1000 - margin.left - margin.right,
+    width = document.getElementById('graph_container').clientWidth * 0.8,
     height = 270 - margin.top - margin.bottom;
 
 // Parse the date / time
 var parseDate = d3.time.format("%Y-%m-%d").parse;
 
 // Set the ranges
-var x = d3.time.scale().range([0, document.getElementById('graph_container').clientWidth * 0.8]);
+var x = d3.time.scale().range([0, width]);
 var y = d3.scale.linear().range([height, 0]);
 <% if @is_dual %>
   var y1 = d3.scale.linear().range([height, 0]);
@@ -119,10 +116,10 @@ svg.append("g")
 <% if @is_dual %>
   svg.append("g")       
       .attr("class", "y axis")  
-      .attr("transform", "translate(" + width + " ,0)") 
+      .attr("transform", "translate(" + (width + 20) + " ,0)") 
       .style("fill", "red")   
       .call(yAxisRight);
 <% end %>
 
-
+});
 </script>
