@@ -1,13 +1,19 @@
 <div class="container">
+	<div class="container">
+
+	<br>
+
 	<h1>Welcome, <%= current_user.username %></h1>
 
-	<div class="container">
-		<h3>Today's Log</h3>
-		<%= render partial: 'logs/form' %>
+	<br>
+
+<!-- 	<h3>Today's Log</h3> -->
+	<%= render partial: 'logs/form' %>
+
+	<br><br>
+
+<!-- 	<h3>Past Logs</h3> -->
+	<%= render partial: 'logs/logs_list' %>
 	</div>
 
-	<br><br><br>
-	
-	<h3>Past Logs</h3>
-	<%= render partial: 'logs/logs_list' %>
 </div>

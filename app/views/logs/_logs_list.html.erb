@@ -1,20 +1,23 @@
-<div class="carousel">
-
-  <% for log in @logs %>
-    <div class="logs_list_item carousel-item" >
-      <h5><%= log.date.strftime("%b %e, %Y") %></h5>
-      <p>Mood: <%= log.mood %></p>
-      <% for factor_log in log.factor_logs %>
-        <% if factor_log.factor.yes_no %>
-          <% response = factor_log.score == 0 ? "No" : "Yes" %>
-          <p><%= factor_log.factor.question%>: <%= response %></p>
-        <% else %>
-          <p><%= factor_log.factor.question%>: <%= factor_log.score %></p>
-        <% end %>
+<div class="card medium grey lighten-4">
+  <div class="card-content">
+    <span class="card-title">Past Logs</span>
+    <div class="carousel">
+      <% for log in @logs %>
+        <div class="logs_list_item carousel-item" >
+          <h5><%= log.date.strftime("%b %e, %Y") %></h5>
+          <p>Mood: <%= log.mood %></p>
+          <% for factor_log in log.factor_logs %>
+            <% if factor_log.factor.yes_no %>
+              <% response = factor_log.score == 0 ? "No" : "Yes" %>
+              <p><%= factor_log.factor.question%>: <%= response %></p>
+            <% else %>
+              <p><%= factor_log.factor.question%>: <%= factor_log.score %></p>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
-  <% end %>
-
+  </div>
 </div>
 
 <script>
@@ -22,3 +25,4 @@
       $('.carousel').carousel();
     });
 </script>
+
