@@ -10,6 +10,8 @@ class HomeController < ApplicationController
         end
       end
       @logs = current_user.logs.order('-date')
+      
+
     else
       @user = User.new
     end
