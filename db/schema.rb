@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108223216) do
+ActiveRecord::Schema.define(version: 20161114234158) do
 
   create_table "factor_logs", force: true do |t|
     t.integer  "log_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20161108223216) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "summary"
+    t.boolean  "public"
   end
 
   create_table "users", force: true do |t|
