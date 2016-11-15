@@ -19,6 +19,12 @@
               <%= number_field_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), factor_log.score %>
             <% end %>
           <% end %>
+
+          <%= label_tag :share_anonymously %>
+          <%= hidden_field_tag "log[public]", "0" %>
+          <%= check_box_tag "log[public]", "1", @log.public, {style: 'opacity:1;left:0;position:inherit'}   %>
+
+
           <br><br>
           <% if @log.mood %>
             <a class="waves-effect waves-light btn orange lighten-3 col s2"><%= f.submit "Update" %></a>

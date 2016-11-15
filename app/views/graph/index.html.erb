@@ -121,7 +121,7 @@
   <% if @is_dual %>
     svg.append("g")       
         .attr("class", "y axis")  
-        .attr("transform", "translate(" + width + " ,0)") 
+        .attr("transform", "translate(" + (width + 95) + " ,0)") 
         .style("fill", "red")   
         .call(yAxisRight);
   <% end %>
