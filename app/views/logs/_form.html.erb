@@ -4,11 +4,12 @@
       <div class="container">
         <% url = @log.id ? log_path(@log) : logs_path %>
         <%= form_for @log, url: url do |f| %>
-          <%= label_tag :mood %>
-          <%= f.number_field :mood, value: @log.mood %>
-
           <%= label_tag :log %>
           <%= f.text_field :summary, value: @log.summary %>
+
+          <% if @log.mood %>
+            <label>Mood score: <%= @log.mood %></label><br><br>
+          <% end %>
 
           <% for factor_log in @log.factor_logs %>
             <%= label_tag factor_log.factor.question %>
