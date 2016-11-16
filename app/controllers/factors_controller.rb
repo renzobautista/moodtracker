@@ -15,6 +15,10 @@ class FactorsController < ApplicationController
       if params[:factor_type] == 'Numeric'
         is_yes_no = false
       end
+      if (current_user.factors.where(deleted: false).map {|c| c.question }).include?(question)
+        @flash = ['You are already tracking that factor.']
+        return render 'new'
+      end
       @factor = Factor.create(question: question, yes_no: is_yes_no, user_id: current_user.id, deleted: false)
     else
       case params[:name]
@@ -27,7 +31,7 @@ class FactorsController < ApplicationController
       else
         return render 'new'
       end
-      if (current_user.factors.map {|c| c.question }).include?(@question)
+      if (current_user.factors.where(deleted: false).map {|c| c.question }).include?(@question)
         @flash = ['You are already tracking that factor.']
         return render 'new'
       end

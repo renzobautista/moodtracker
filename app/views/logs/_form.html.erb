@@ -1,21 +1,37 @@
-<% url = @log.id ? log_path(@log) : logs_path %>
-<%= form_for @log, url: url do |f| %>
-  <%= label_tag :mood %>
-  <%= f.number_field :mood, value: @log.mood %>
+<div class="card grey lighten-4">
+  <div class="card-content">
+    <span class="card-title">Today's Log</span>
+      <div class="container">
+        <% url = @log.id ? log_path(@log) : logs_path %>
+        <%= form_for @log, url: url do |f| %>
+          <%= label_tag :mood %>
+          <%= f.number_field :mood, value: @log.mood %>
 
-  <% for factor_log in @log.factor_logs %>
-    <%= label_tag factor_log.factor.question %>
-    <% if factor_log.factor.yes_no %>
-      <%= hidden_field_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), "0" %>
-      <%= check_box_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), "1", (factor_log.score != nil and factor_log.score != 0) %>
-    <% else %>
-      <%= number_field_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), factor_log.score %>
-    <% end %>
-  <% end %>
+          <%= label_tag :log %>
+          <%= f.text_field :summary, value: @log.summary %>
 
-  <% if @log.mood %>
-    <%= f.submit "Update" %>
-  <% else %>
-    <%= f.submit "Create" %>
-  <% end %>
-<% end %>
+          <% for factor_log in @log.factor_logs %>
+            <%= label_tag factor_log.factor.question %>
+            <% if factor_log.factor.yes_no %>
+              <%= hidden_field_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), "0" %>
+              <%= check_box_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), "1", (factor_log.score != nil and factor_log.score != 0) %>
+            <% else %>
+              <%= number_field_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), factor_log.score %>
+            <% end %>
+          <% end %>
+
+          <%= label_tag :share_anonymously %>
+          <%= hidden_field_tag "log[public]", "0" %>
+          <%= check_box_tag "log[public]", "1", @log.public, {style: 'opacity:1;left:0;position:inherit'}   %>
+
+
+          <br><br>
+          <% if @log.mood %>
+            <a class="waves-effect waves-light btn orange lighten-3 col s2"><%= f.submit "Update" %></a>
+          <% else %>
+            <%= f.submit "Create" %>
+          <% end %>
+        <% end %>
+      </div>
+  </div>
+</div>

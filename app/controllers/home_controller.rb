@@ -9,9 +9,7 @@ class HomeController < ApplicationController
           factor_log = @log.factor_logs.build(factor_id: factor.id)
         end
       end
-      @logs = current_user.logs.order('-date')
-      
-
+      @logs = current_user.logs.order('date DESC')
     else
       @user = User.new
     end

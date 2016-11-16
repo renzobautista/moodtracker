@@ -1,10 +1,24 @@
-<h3>Log In</h3>
-<%= form_tag login_post_path do %>
-  <%= label_tag :username %>
-  <%= text_field_tag :username, params[:username] %>
+<div class="container">
+	<div class="container">
+		<div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div>
 
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
-    
-  <%= submit_tag "Log In" %>
-<% end %>
+		<h3>Log In</h3>
+
+		<div class="row"></div><div class="row"></div>
+
+		<%= form_tag login_post_path do %>
+		  <%= label_tag :username %>
+		  <%= text_field_tag :username, params[:username] %>
+
+		  <%= label_tag :password %>
+		  <%= password_field_tag :password %>
+
+		  <div class="row"></div><div class="row"></div>
+		    
+		  <div class="row">
+			  <a class="waves-effect waves-light btn orange lighten-3 col s2"><%= submit_tag "Log In" %></a>
+			  <a href="<%= root_url %>" class="waves-effect waves-light btn orange grey lighten-1 col s2 offset-s1">Cancel</a>
+		  </div>
+		<% end %> 
+	</div>
+</div>
