@@ -20,7 +20,7 @@ class LogsController < ApplicationController
     puts "testjalkfjweklfjawlkfjwlkafjawlkefj   "
     puts response.body
     puts "end"
-    @log.mood = (5 + (response.body["score"] * 5)).round
+    @log.mood = [(6.5 + (response.body["score"] * 5)).round, 10].min
 
     @log.summary = params[:log][:summary]
     @log.public = is_public
