@@ -5,7 +5,6 @@ class LogsController < ApplicationController
       is_public = true
     end
     @log = Log.new(user_id: current_user.id, date: Date.today)
-    @log.mood = params[:log][:mood]
 
     # These code snippets use an open-source library.
     # These code snippets use an open-source library. http://unirest.io/ruby
@@ -19,9 +18,9 @@ class LogsController < ApplicationController
         "text" => params[:log][:summary]
       }
     puts "testjalkfjweklfjawlkfjwlkafjawlkefj   "
-    puts response
-    puts response.label
+    puts response.body
     puts "end"
+    @log.mood = (5 + (response.body["score"] * 5)).round
 
     @log.summary = params[:log][:summary]
     @log.public = is_public
@@ -42,7 +41,6 @@ class LogsController < ApplicationController
       is_public = true
     end
     @log = current_user.logs.where(date: Date.today)[0]
-    @log.mood = params[:log][:mood]
 
     # These code snippets use an open-source library. http://unirest.io/ruby
     response = Unirest.post "https://twinword-sentiment-analysis.p.mashape.com/analyze/",
@@ -55,9 +53,9 @@ class LogsController < ApplicationController
         "text" => params[:log][:summary]
       }
     puts "testjalkfjweklfjawlkfjwlkafjawlkefj   "
-    puts response
     puts response.body
     puts "end"
+    @log.mood = [(6.5 + (response.body["score"] * 5)).round, 10].min
 
     @log.summary = params[:log][:summary]
     @log.public = is_public
