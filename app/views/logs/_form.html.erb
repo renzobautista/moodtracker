@@ -10,7 +10,7 @@
           <% if @log.mood %>
             <label>Mood score: <%= @log.mood %></label><br><br>
           <% end %>
-
+          
           <% for factor_log in @log.factor_logs %>
             <%= label_tag factor_log.factor.question %>
             <% if factor_log.factor.yes_no %>
