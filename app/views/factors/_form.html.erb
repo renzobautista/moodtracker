@@ -5,8 +5,10 @@
   <%= text_field_tag 'factor' %>
 
   <%= label_tag :factor_type %>
-  <%= radio_button_tag 'factor_type', 'Yes or no' %> Yes or no
-  <%= radio_button_tag 'factor_type', 'Numeric' %> Numeric
+  <br>
+  <%= radio_button_tag 'factor_type', 'Yes or no', true, {style: 'opacity:1;left:0;position:inherit'} %> Yes or no
+  <br>
+  <%= radio_button_tag 'factor_type', 'Numeric', false, {style: 'opacity:1;left:0;position:inherit'} %> Numeric
 
   <br><br><br>
   

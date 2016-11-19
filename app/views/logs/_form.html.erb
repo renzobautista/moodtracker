@@ -15,7 +15,8 @@
             <%= label_tag factor_log.factor.question %>
             <% if factor_log.factor.yes_no %>
               <%= hidden_field_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), "0" %>
-              <%= check_box_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), "1", (factor_log.score != nil and factor_log.score != 0) %>
+              <%= check_box_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), "1", (factor_log.score != nil and factor_log.score != 0), {style: 'opacity:1;left:0;position:inherit'} %>
+              <br><br>
             <% else %>
               <%= number_field_tag ("log[factor_logs][" + String(factor_log.factor_id) + "]"), factor_log.score %>
             <% end %>

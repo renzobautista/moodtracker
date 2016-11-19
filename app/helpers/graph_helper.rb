@@ -1,6 +1,9 @@
 module GraphHelper
   def get_correlation(logs)
     n = logs.count
+    if n == 0
+      return 0
+    end
     if n == 1
       return 0
     end
@@ -30,6 +33,9 @@ module GraphHelper
 
   def get_slope(logs)
     n = logs.count
+    if n == 0
+      return 0
+    end
     total_mood = 0
     total_mood_squared = 0
     total_score = 0
