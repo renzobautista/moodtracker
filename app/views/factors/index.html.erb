@@ -1,19 +1,14 @@
 <div class="container">
 	<div class="container">
-<!-- 		<br>
-		<h1>Factors</h1>
-		<br> -->
+
 		<br><br><br>
 		<ul class="collection with-header">
 			<li class="collection-header"><h3>Tracked Factors</h3></li>
 			<% if !@factors.empty? %>
 			    <% for factor in @factors %>
 			      <li class="collection-item">
-			      	<%= factor.question %> 
-			      	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-			      	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-			      	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-			      	<%= link_to "Untrack", factor_path(factor), method: :delete, data: { confirm: 'Are you certain you want to stop tracking this factor?' } %> </li>
+			      	<div><%= factor.question %><%= link_to "Untrack", factor_path(factor), method: :delete, data: { confirm: 'Are you certain you want to stop tracking this factor?' }, :class => "secondary-content" %></div>
+			      </li>
 			    <% end %>
 			<% else %>
 			  <li class="collection-item">You are currently not tracking any factors.</li>
