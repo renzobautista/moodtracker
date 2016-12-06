@@ -6,7 +6,7 @@
         <% url = @log.id ? log_path(@log) : logs_path %>
         <%= form_for @log, url: url do |f| %>
           <div class="input-field">
-            <%= label_tag :log %>
+            <%= label_tag :how_was_your_day? %>
             <%= f.text_field :summary, value: @log.summary %>
           </div>
           <% if @log.mood %>

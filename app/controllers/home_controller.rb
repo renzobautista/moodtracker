@@ -10,6 +10,9 @@ class HomeController < ApplicationController
         end
       end
       @logs = current_user.logs.order('date DESC')
+      if @logs.empty?
+        @flash = ["You can start by logging a short entry of your day below. We'll assign a mood score for you based on the words you write. To add factors you want to track along with your daily log, click the 'Factors' button above."]
+      end
     else
       @user = User.new
     end
