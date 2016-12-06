@@ -11,7 +11,7 @@
 
   <ul>
     <% for factor in @factors %>
-      <li><a href="<%= graph_path %>?factor_id=<%= factor.id %>"><%= factor.question %></a></li>
+      <li><a class="waves-effect waves-light btn indigo lighten-3 col s2" href="<%= graph_path %>?factor_id=<%= factor.id %>"><%= factor.question %></a></li>
     <% end %>
   </ul>
 
