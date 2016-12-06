@@ -1,9 +1,9 @@
   <nav>
-    <div class="nav-wrapper orange lighten-3">
+    <div class="nav-wrapper indigo lighten-3">
       <a href="<%= root_url %>" class="brand-logo center">Mood Tracker</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <% if logged_in? %>
-          <li><a href="<%= browse_path %>">Browse Logs</a></li>
+          <li><a href="<%= browse_path %>">Community Logs</a></li>
           <li><a href="<%= factors_path %>">Factors</a></li>
           <li><a href="<%= graph_path %>">Graph</a></li>
         <% end %>
